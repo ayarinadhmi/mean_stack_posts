@@ -5,15 +5,16 @@ const path = require("path");
 
 const app = express();
 const postsRoute = require("./routes/posts");
+const userRoutes = require("./routes/user");
 
 mongoose
   .connect(
-    "mongodb+srv://nadhmi:VlCAP45MiGtYr0Bv@cluster0-ttiqv.mongodb.net/test?retryWrites=true&w=majority",{useUnifiedTopology: true,useNewUrlParser: true}
+    "mongodb+srv://nadhmi:VlCAP45MiGtYr0Bv@cluster0-ttiqv.mongodb.net/test?w=majority",{useUnifiedTopology: true,useNewUrlParser: true}
   )
   .then(() => {
     console.log("connected to database");
   })
-  .catch(() => {t
+  .catch(() => {
     console.log("aconnecion failed");
   });
 
@@ -35,5 +36,6 @@ app.use((req, res, next) => {
 });
 
 app.use("/api/posts",postsRoute);
+app.use("/api/users",userRoutes);
 
 module.exports = app;
